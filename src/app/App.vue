@@ -5,12 +5,13 @@ import { startLoop } from '@/app/game-loop'
 import { createDocument } from '@/shared/document'
 import { BonusBanner, ChainMeter } from '@/features/bonus'
 import { ControlDeck, TiltLamp } from '@/features/flippers'
-import { ChallengeBoard, HistoryList, readSave, ResultCard } from '@/features/records'
+import { ChallengeBoard, HistoryList, openDaily, readSave, ResultCard } from '@/features/records'
 import { EventTicker, ScoreHud } from '@/features/scoring'
 import { MechanismPanel, mountFresh, TableView } from '@/features/table'
 
 const doc = reactive(createDocument())
 mountFresh(doc, readSave())
+openDaily(doc)
 const input = createInputController(window)
 let stop = (): void => {}
 

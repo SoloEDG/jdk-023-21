@@ -4,6 +4,7 @@ import {
   findMechanism,
   flashNote,
   type CareerState,
+  type DailyState,
   type HistoryEntry,
   type MechanismKind,
   type MechanismState,
@@ -31,6 +32,7 @@ export interface KeptRecords {
   career: CareerState
   history: HistoryEntry[]
   bestScore: number
+  daily: DailyState
 }
 
 function blank(id: string, kind: MechanismKind, label: string): MechanismState {
@@ -74,6 +76,7 @@ export function mountFresh(doc: PinballDocument, kept: KeptRecords): void {
   next.career = kept.career
   next.history = kept.history
   next.bestScore = kept.bestScore
+  next.daily = kept.daily
   next.mechanisms = createMechanisms()
   const pose = anchors()
   next.flippers.left.angle = pose.leftRest

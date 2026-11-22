@@ -1,5 +1,15 @@
 export { goalViews, latchCareer } from '@/features/records/model/challenge-rules'
 export {
+  creditDailyCleanFinish,
+  dailyGoalSpecs,
+  dailyGoalViews,
+  localDayKey,
+  openDaily,
+  pinDailyForRun,
+  syncDaily,
+} from '@/features/records/model/daily-rules'
+export type { DailyGoalView } from '@/features/records/model/daily-rules'
+export {
   commitSession,
   emptyKept,
   formatPlay,

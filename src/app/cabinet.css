@@ -244,6 +244,21 @@ button:focus-visible, canvas:focus-visible {
 
 .badges span.lit { background: #11493d; color: #f3e2c4; border-color: #11493d; }
 
+.daily-block { margin-top: 10px; padding-top: 8px; border-top: 2px solid #ead7b6; }
+
+.goal-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+
+.goal-columns .daily-block { margin-top: 0; padding-top: 0; border-top: 0; }
+
+.daily-block > .eyebrow { margin-bottom: 2px; }
+
+.daily-note { margin: 6px 0 0; font-size: 12px; color: #8a7460; }
+
+@media (max-width: 720px) {
+  .goal-columns { grid-template-columns: 1fr; }
+  .goal-columns .daily-block { margin-top: 10px; padding-top: 8px; border-top: 2px solid #ead7b6; }
+}
+
 .history-list li span { color: #5c3b2e; }
 
 .result-card h2 { font-size: 36px; color: #c81d3a; }

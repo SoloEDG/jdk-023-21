@@ -1,7 +1,7 @@
 import { flashNote, type PinballDocument } from '@/shared/document'
 import { clearChain } from '@/features/bonus'
 import { clearWarnings } from '@/features/flippers'
-import { commitSession } from '@/features/records'
+import { commitSession, openDaily } from '@/features/records'
 import { mountFresh, stickPlunger } from '@/features/table'
 
 export function togglePause(doc: PinballDocument): void {
@@ -46,5 +46,7 @@ export function restartGame(doc: PinballDocument): void {
     career: doc.career,
     history: doc.history,
     bestScore: doc.bestScore,
+    daily: doc.daily,
   })
+  openDaily(doc)
 }

@@ -82,6 +82,27 @@ export interface CareerState {
   cleanFinish: boolean
 }
 
+export type DailyGoalId = 'score' | 'bonus' | 'bank' | 'clean'
+
+export interface DailyGoalSpec {
+  id: DailyGoalId
+  target: number
+}
+
+export interface DailyProgress {
+  score: number
+  bonusEntries: number
+  bankClears: number
+  cleanFinishes: number
+}
+
+export interface DailyState {
+  day: string
+  goals: DailyGoalSpec[]
+  progress: DailyProgress
+  ledger: Record<string, DailyProgress>
+}
+
 export interface HistoryEntry {
   id: string
   endedAt: number
@@ -111,6 +132,10 @@ export interface RunMeta {
   playMs: number
   storedScore: number
   storageWarned: boolean
+  dailyDay: string
+  dailyScoreMark: number
+  dailyBonusMark: number
+  dailyBankMark: number
 }
 
 export interface PinballDocument {
@@ -127,6 +152,7 @@ export interface PinballDocument {
   gates: { rampOpen: boolean }
   chain: ChainState
   live: LiveGoals
+  daily: DailyState
   career: CareerState
   history: HistoryEntry[]
   feed: FeedItem[]
@@ -138,6 +164,14 @@ export interface PinballDocument {
 
 export function defaultCareer(): CareerState {
   return { score10k: false, bonusOnce: false, bankTwice: false, cleanFinish: false }
+}
+
+export function defaultDailyProgress(): DailyProgress {
+  return { score: 0, bonusEntries: 0, bankClears: 0, cleanFinishes: 0 }
+}
+
+export function emptyDaily(): DailyState {
+  return { day: '', goals: [], progress: defaultDailyProgress(), ledger: {} }
 }
 
 export function createDocument(): PinballDocument {
@@ -169,12 +203,23 @@ export function createDocument(): PinballDocument {
     gates: { rampOpen: false },
     chain: { count: 0, lastZone: null, remainMs: 0, bonusMs: 0, multiplier: 1 },
     live: { bonusEntries: 0, bankClears: 0, tilted: false, bankPending: false, bankResetMs: 0 },
+    daily: emptyDaily(),
     career: defaultCareer(),
     history: [],
     feed: [],
     feedSeq: 0,
     note: { text: '', ms: 0 },
-    run: { launched: false, committed: false, playMs: 0, storedScore: 0, storageWarned: false },
+    run: {
+      launched: false,
+      committed: false,
+      playMs: 0,
+      storedScore: 0,
+      storageWarned: false,
+      dailyDay: '',
+      dailyScoreMark: 0,
+      dailyBonusMark: 0,
+      dailyBankMark: 0,
+    },
     signals: { drain: false },
   }
 }
